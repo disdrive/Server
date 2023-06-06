@@ -14,7 +14,7 @@ export const quit: command = {
       return;
     }
 
-    // if (confirmUser(userId, password)) {
+    // if (await confirmUser(userId, password)) {
     //   await interaction.reply('User id or password is incorrect.');
     // }
 
