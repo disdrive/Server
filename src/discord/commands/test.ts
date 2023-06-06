@@ -1,10 +1,9 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { ChatInputCommandInteraction } from 'discord.js';
-import type { command } from '../type';
+import type { Command } from '../type';
 
-export const test: command = {
+export const test: Command = {
   data: new SlashCommandBuilder().setName('ping').setDescription('test command'),
-  execute: async (interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction) => {
     await interaction.reply('pong!');
   },
 }

@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { ChatInputCommandInteraction } from 'discord.js';
 import type { Command } from '../type';
 import { isUserIdTaken } from '../../db/index';
 import { registerUser } from '../../db/index';
