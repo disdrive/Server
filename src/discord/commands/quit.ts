@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import type { command } from '../type';
-import { confirmUser } from '../../db/queries/confirmUser';
-import { deleteUser } from '../../db/queries/deleteUser';
+import { confirmUser } from '../../db/index';
+import { deleteUser } from '../../db/index';
 
 export const quit: command = {
   data: new SlashCommandBuilder().setName('quit').setDescription('quit your account')

@@ -1,8 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import type { command } from '../type';
-import { isUserIdTaken } from '../../db/queries/isUserIdTaken';
-import { registerUser } from '../../db/queries/regiterUser';
+import { isUserIdTaken } from '../../db/index';
+import { registerUser } from '../../db/index';
 
 export const register: command = {
   data: new SlashCommandBuilder().setName('register').setDescription('register your account')
