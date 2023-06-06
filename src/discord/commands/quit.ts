@@ -1,14 +1,14 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import type { command } from '../type';
+import type { Command } from '../type';
 import { confirmUser } from '../../db/index';
 import { deleteUser } from '../../db/index';
 
-export const quit: command = {
+export const quit: Command = {
   data: new SlashCommandBuilder().setName('quit').setDescription('quit your account')
     .addStringOption(option => option.setName('userid').setRequired(true))
     .addStringOption(option => option.setName('password').setRequired(true)),
-  execute: async (interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction) => {
     const userId = interaction.options.getString('userid');
     const password = interaction.options.getString('password');
     if (!userId || !password) {

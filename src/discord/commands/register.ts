@@ -1,14 +1,14 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
-import type { command } from '../type';
+import type { Command } from '../type';
 import { isUserIdTaken } from '../../db/index';
 import { registerUser } from '../../db/index';
 
-export const register: command = {
+export const register: Command = {
   data: new SlashCommandBuilder().setName('register').setDescription('register your account')
     .addStringOption(option => option.setName('userid').setDescription('Use at least 6 characters.').setRequired(true))
     .addStringOption(option => option.setName('password').setDescription('Use at least 6 characters, including both numbers and letters').setRequired(true)),
-  execute: async (interaction: ChatInputCommandInteraction) => {
+  execute: async (interaction) => {
     const userId = interaction.options.getString('userid');
     const password = interaction.options.getString('password');
     if (!userId || !password) {
