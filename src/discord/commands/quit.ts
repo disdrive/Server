@@ -20,10 +20,10 @@ export const quit: command = {
 
     try {
       // await deleteUser(userId, password);
-      await interaction.reply('Your account has been deleted.');
+      await interaction.reply('You have successfully quit your account.');
       return;
     } catch (error) {
-      await interaction.reply('Sorry, there was an error trying to delete your account. Please try again later.\nerror: \n```\n' + error + '\n```');
+      await interaction.reply('Sorry, there was an error trying to quit your account. Please try again later.\nerror: \n```\n' + error + '\n```');
       return;
     }
   }
