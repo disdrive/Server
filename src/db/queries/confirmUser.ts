@@ -4,8 +4,11 @@ export const confirmUser = async (userId: string, password: string): Promise<boo
   const account = await prisma.account.findUnique({
     where: {
       userId: userId,
-      password: password,
     },
   });
-  return account !== null;
+  if (account && account.password === password) {
+    return true;
+  } else {
+    return false;
+  }
 };
