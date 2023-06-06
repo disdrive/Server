@@ -21,7 +21,7 @@ export const register: command = {
       error = true;
       errorMessages += 'Please make your user ID at least 6 characters long.\n';
     }
-    // if (usedUserId(userId)) {
+    // if (isUserIdTaken(userId)) {
     //   error = true;
     //   errorMessages += 'Please use a different user ID. That one is already taken.\n';
     // }
