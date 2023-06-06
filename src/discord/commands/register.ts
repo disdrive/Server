@@ -43,7 +43,7 @@ export const register: command = {
     }
 
     try {
-      // await registerUser(userId, password);
+      // await registerUser(userId, password, interaction.channelId as string);
       await interaction.reply('Your account has been registered.');
       return;
     } catch (error) {
