@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import type { command } from '../type';
+import { confirmUser } from '../../db/queries/confirmUser';
+import { deleteUser } from '../../db/queries/deleteUser';
 
 export const quit: command = {
   data: new SlashCommandBuilder().setName('quit').setDescription('quit your account')
@@ -14,12 +16,12 @@ export const quit: command = {
       return;
     }
 
-    // if (await confirmUser(userId, password)) {
-    //   await interaction.reply('User id or password is incorrect.');
-    // }
+    if (await confirmUser(userId, password)) {
+      await interaction.reply('User id or password is incorrect.');
+    }
 
     try {
-      // await deleteUser(userId, password);
+      await deleteUser(userId, password);
       await interaction.reply('You have successfully quit your account.');
       return;
     } catch (error) {

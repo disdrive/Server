@@ -1,6 +1,8 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { ChatInputCommandInteraction } from 'discord.js';
 import type { command } from '../type';
+import { isUserIdTaken } from '../../db/queries/isUserIdTaken';
+import { registerUser } from '../../db/queries/regiterUser';
 
 export const register: command = {
   data: new SlashCommandBuilder().setName('register').setDescription('register your account')
@@ -21,10 +23,10 @@ export const register: command = {
       error = true;
       errorMessages += 'Please make your user ID at least 6 characters long.\n';
     }
-    // if (await isUserIdTaken(userId)) {
-    //   error = true;
-    //   errorMessages += 'Please use a different user ID. That one is already taken.\n';
-    // }
+    if (await isUserIdTaken(userId)) {
+      error = true;
+      errorMessages += 'Please use a different user ID. That one is already taken.\n';
+    }
     if (password.length < 6) {
       error = true;
       errorMessages += 'Please make your password at least 6 characters long.\n';
@@ -43,7 +45,7 @@ export const register: command = {
     }
 
     try {
-      // await registerUser(userId, password, interaction.channelId as string);
+      await registerUser(userId, password, interaction.channelId as string);
       await interaction.reply('Your account has been registered.');
       return;
     } catch (error) {
