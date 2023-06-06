@@ -1,11 +1,12 @@
 import { prisma } from '../app';
+import { hashPassword } from '../../utils/hashPassword';
 
 export const registerUser = async (userId: string, password: string, discordChannelId: string): Promise<void> => {
   await prisma.account.create({
     data: {
-      userId,
-      password,
-      discordChannelId
+      userId: userId,
+      password: await hashPassword(password),
+      discordChannelId: discordChannelId,
     },
   });
 };

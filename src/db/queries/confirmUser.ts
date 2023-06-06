@@ -1,4 +1,5 @@
 import { prisma } from "../app";
+import { comparePasswords } from "../../utils/comparePasswords";
 
 export const confirmUser = async (userId: string, password: string): Promise<boolean> => {
   const account = await prisma.account.findUnique({
@@ -6,7 +7,10 @@ export const confirmUser = async (userId: string, password: string): Promise<boo
       userId: userId,
     },
   });
-  if (account && account.password === password) {
+  if (!account) {
+    return false;
+  }
+  if (await comparePasswords(password, account.password)) {
     return true;
   } else {
     return false;

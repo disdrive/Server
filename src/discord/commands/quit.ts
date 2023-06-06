@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { ChatInputCommandInteraction } from 'discord.js';
 import type { Command } from '../type';
 import { confirmUser } from '../../db/index';
 import { deleteUser } from '../../db/index';
@@ -12,7 +11,6 @@ export const quit: Command = {
     const userId = interaction.options.getString('userid');
     const password = interaction.options.getString('password');
     if (!userId || !password) {
-      // await interaction.reply('Please input userid and password.');
       return;
     }
 
@@ -21,7 +19,7 @@ export const quit: Command = {
     }
 
     try {
-      await deleteUser(userId, password);
+      await deleteUser(userId);
       await interaction.reply('You have successfully quit your account.');
       return;
     } catch (error) {
