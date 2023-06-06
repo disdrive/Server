@@ -1,10 +1,10 @@
 import { SlashCommandBuilder } from 'discord.js';
 import type { Command } from '../type';
-import { confirmUser } from '../../db/index';
-import { deleteUser } from '../../db/index';
+import { confirmUser } from '../../db';
+import { deleteUser } from '../../db';
 
 export const quit: Command = {
-  data: new SlashCommandBuilder().setName('quit').setDescription('quit your account')
+  data: new SlashCommandBuilder().setName('quit').setDescription('delete your account')
     .addStringOption(option => option.setName('userid').setDescription('user id').setRequired(true))
     .addStringOption(option => option.setName('password').setDescription('password').setRequired(true)),
   execute: async (interaction) => {
@@ -14,16 +14,17 @@ export const quit: Command = {
       return;
     }
 
-    if (await confirmUser(userId, password)) {
+    if (!(await confirmUser(userId, password))) {
       await interaction.reply('User id or password is incorrect.');
+      return;
     }
 
     try {
       await deleteUser(userId);
-      await interaction.reply('You have successfully quit your account.');
+      await interaction.reply('You have successfully delete your account.');
       return;
     } catch (error) {
-      await interaction.reply('Sorry, there was an error trying to quit your account. Please try again later.\nerror: \n```\n' + error + '\n```');
+      await interaction.reply('Sorry, there was an error trying to delete your account. Please try again later.\nerror: \n```\n' + error + '\n```');
       return;
     }
   }
