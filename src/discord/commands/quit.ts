@@ -5,8 +5,8 @@ import { deleteUser } from '../../db/index';
 
 export const quit: Command = {
   data: new SlashCommandBuilder().setName('quit').setDescription('quit your account')
-    .addStringOption(option => option.setName('userid').setRequired(true))
-    .addStringOption(option => option.setName('password').setRequired(true)),
+    .addStringOption(option => option.setName('userid').setDescription('user id').setRequired(true))
+    .addStringOption(option => option.setName('password').setDescription('password').setRequired(true)),
   execute: async (interaction) => {
     const userId = interaction.options.getString('userid');
     const password = interaction.options.getString('password');
