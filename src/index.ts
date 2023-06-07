@@ -5,6 +5,7 @@ dotenv.config();
 
 import { authRoutes } from './routes/v1/auth/index';
 import { fileRoutes } from './routes/v1/file/index';
+import { testRoutes } from './routes/v1/test';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ルーティング
+app.use('/v1', testRoutes);
 app.use('/v1/auth', authRoutes);
 app.use('/v1/file', fileRoutes);
 
