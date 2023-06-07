@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { Command } from '../type';
+import type { Command } from '../../types/discord';
 
 export const test: Command = {
   data: new SlashCommandBuilder().setName('ping').setDescription('test command'),

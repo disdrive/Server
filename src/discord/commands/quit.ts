@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { Command } from '../type';
+import type { Command } from '../../types/discord';
 import { confirmUser } from '../../db';
 import { deleteUser } from '../../db';
 

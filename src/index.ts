@@ -3,17 +3,20 @@ import dotenv from 'dotenv';
 import { client } from './discord';
 dotenv.config();
 
-import router from './routes/v1/index';
+import { authRoutes } from './routes/v1/auth/index';
+import { fileRoutes } from './routes/v1/file/index';
 
 const app = express();
 
 // JSONオブジェクトの受信設定
-app.use(express.json())
+app.use(express.json());
+
 // 配列側のオブジェクトの受信設定
 app.use(express.urlencoded({ extended: true }));
 
 // ルーティング
-app.use('/v1', router);
+app.use('/v1/auth', authRoutes);
+app.use('/v1/file', fileRoutes);
 
 // 3010ポートで受信
 const port = process.env.PORT || 3010;

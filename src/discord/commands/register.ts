@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { Command } from '../type';
+import type { Command } from '../../types/discord';
 import { isUserIdTaken } from '../../db';
 import { registerUser } from '../../db';
 
