@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { confirmUser } from '../../../db';
-import { getUserInfo } from '../../../db/queries/getUserInfo';
+import { getUserInfo } from '../../../db';
 import { comparePasswords } from '../../../utils/comparePasswords';
 import { makeToken } from '../../../utils/makeToken';
 
