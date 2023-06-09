@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
-
-const saltRounds = 10;
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const hashPassword = async (password: string): Promise<string> => {
-  return bcrypt.hash(password, saltRounds);
+  return bcrypt.hash(password, process.env.SALT_ROUNDS || 10);
 };
