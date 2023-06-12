@@ -27,4 +27,6 @@ model FileData {
   publicUrl  String?
   date       DateTime
   Account    Account  @relation(fields: [accountId], references: [userId])
+
+  @@unique([accountId, key])
 }
