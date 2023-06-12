@@ -32,16 +32,16 @@ const downloadDir = cacheDir + '/downloads';
 
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
-  console.log('uploadDir created.');
+  console.log(`${uploadDir} created.`);
 } else {
-  console.log('uploadDir already exists.');
+  console.log(`${uploadDir} already exists.`);
 }
 
 if (!fs.existsSync(downloadDir)) {
   fs.mkdirSync(downloadDir, { recursive: true });
-  console.log('downloadDir created.');
+  console.log(`${downloadDir} created.`);
 } else {
-  console.log('downloadDir already exists.');
+  console.log(`${downloadDir} already exists.`);
 }
 
 // APIサーバ起動
