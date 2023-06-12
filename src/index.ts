@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import fs from 'fs';
 import { client } from './discord';
 dotenv.config();
 
@@ -22,6 +23,20 @@ app.use('/v1/file', fileRoutes);
 
 // 3010ポートで受信
 const port = process.env.PORT || 3010;
+
+//キャッシュディレクトリ作成
+
+const cacheDir = './cache';
+const uploadDir = cacheDir + '/uploads';
+const downloadDir = cacheDir + '/downloads';
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+if (!fs.existsSync(downloadDir)) {
+  fs.mkdirSync(downloadDir, { recursive: true });
+}
 
 // APIサーバ起動
 app.listen(port);
