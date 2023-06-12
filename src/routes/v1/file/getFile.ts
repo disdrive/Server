@@ -8,7 +8,7 @@ export const getFile = express.Router();
 
 getFile.get('/', async (req: Request, res: Response) => {
   const fileData = await getFileData(req.query.accountId as string, req.query.key as string);
-  if (fileData === undefined) {
+  if (fileData === undefined || fileData === null) {
     res.status(404).send('Not found');
     return;
   }
@@ -18,10 +18,10 @@ getFile.get('/', async (req: Request, res: Response) => {
   if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath);
   }
-  const filePath = path.join(dirPath, fileData?.accountId + "_" + fileData?.key + "_" + fileData?.name);
+  const filePath = path.join(dirPath, fileData.accountId + "_" + fileData.key + "_" + fileData.name);
 
   const discordRes = await axios({
-    url: fileData?.discordUrl,
+    url: fileData.discordUrl,
     method: 'GET',
     responseType: 'stream',
   });
