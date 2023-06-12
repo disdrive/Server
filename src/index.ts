@@ -26,16 +26,22 @@ const port = process.env.PORT || 3010;
 
 //キャッシュディレクトリ作成
 
-const cacheDir = './cache';
+const cacheDir = './.cache';
 const uploadDir = cacheDir + '/uploads';
 const downloadDir = cacheDir + '/downloads';
 
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
+  console.log('uploadDir created.');
+} else {
+  console.log('uploadDir already exists.');
 }
 
 if (!fs.existsSync(downloadDir)) {
   fs.mkdirSync(downloadDir, { recursive: true });
+  console.log('downloadDir created.');
+} else {
+  console.log('downloadDir already exists.');
 }
 
 // APIサーバ起動
