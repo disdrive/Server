@@ -1,8 +1,9 @@
 declare namespace Express {
   export interface Request {
     user?: {
-      id: string;
+      id: number;
       userId: string;
+      discordChannelId: string;
     };
   }
 }

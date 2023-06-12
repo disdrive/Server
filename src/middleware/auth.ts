@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { getUserInfo } from '../db';
 
-export const auth = (req: Request, res: Response, next: NextFunction) => {
+export const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]; // Take the second part of the string after 'Bearer'
 
@@ -12,10 +13,16 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || '') as { id: string; userId: string };
 
-    // Add the decoded data to the request object
+    const userInfo = await getUserInfo(decoded.userId);
+
+    if (!userInfo) {
+      throw new Error('User not found');
+    }
+
     req.user = {
-      id: decoded.id,
-      userId: decoded.userId,
+      id: userInfo.id,
+      userId: userInfo.userId,
+      discordChannelId: userInfo.discordChannelId,
     };
 
     next(); // Move to the next middleware or route handler
