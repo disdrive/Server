@@ -3,12 +3,14 @@ import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
 import { getFileData } from '@/db';
+import { Logger } from '@/utils';
 
 export const getFile = express.Router();
 
 getFile.get('/', async (req: Request, res: Response) => {
   const fileData = await getFileData(req.query.accountId as string, req.query.key as string);
   if (fileData === undefined || fileData === null) {
+    Logger.getInstance().log(404, req);
     res.status(404).send('Not found');
     return;
   }
@@ -29,6 +31,7 @@ getFile.get('/', async (req: Request, res: Response) => {
     res.download(filePath, (err) => {
       if (err) {
         console.error(err);
+        Logger.getInstance().log(500, req);
         res.status(500).send('An error occurred.');
       }
       // ダウンロードが完了したら一時的なファイルを削除する
@@ -40,6 +43,7 @@ getFile.get('/', async (req: Request, res: Response) => {
 
   writer.on('error', (err) => {
     console.error(err);
+    Logger.getInstance().log(500, req);
     res.status(500).send('An error occurred.');
   });
 });
