@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { Command } from '../../types/discord';
-import { confirmUser } from '../../db';
-import { deleteUser } from '../../db';
+import type { Command } from '@/types/discord';
+import { confirmUser } from '@/db';
+import { deleteUser } from '@/db';
 
 export const quit: Command = {
   data: new SlashCommandBuilder().setName('quit').setDescription('delete your account')

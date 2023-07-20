@@ -1,8 +1,8 @@
 import express from 'express';
 import { getFile } from './getFile';
 import { postFile } from './postFile';
-import { auth } from '../../../middleware/auth';  // Assuming the middleware is exported from this path
-import { upload } from '../../../middleware/upload';
+import { auth } from '@/middleware/auth';  // Assuming the middleware is exported from this path
+import { upload } from '@/middleware/upload';
 
 export const fileRoutes = express.Router();
 

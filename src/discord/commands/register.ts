@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from 'discord.js';
-import type { Command } from '../../types/discord';
-import { isUserIdTaken } from '../../db';
-import { registerUser } from '../../db';
+import type { Command } from '@/types/discord';
+import { isUserIdTaken } from '@/db';
+import { registerUser } from '@/db';
 
 export const register: Command = {
   data: new SlashCommandBuilder().setName('register').setDescription('register your account')

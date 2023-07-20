@@ -4,9 +4,9 @@ import fs from 'fs';
 import { client } from './discord';
 dotenv.config();
 
-import { authRoutes } from './routes/v1/auth/index';
-import { fileRoutes } from './routes/v1/file/index';
-import { testRoutes } from './routes/v1/test';
+import { authRoutes } from '@/routes/v1/auth/index';
+import { fileRoutes } from '@/routes/v1/file/index';
+import { testRoutes } from '@/routes/v1/test';
 
 const app = express();
 

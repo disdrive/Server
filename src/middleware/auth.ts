@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { getUserInfo } from '../db';
+import { getUserInfo } from '@/db';
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import axios from 'axios';
 import fs from 'fs';
 import path from 'path';
-import { getFileData } from '../../../db';
+import { getFileData } from '@/db';
 
 export const getFile = express.Router();
 

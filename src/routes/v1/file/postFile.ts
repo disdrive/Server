@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { uploadFile } from '../../../discord';
+import { uploadFile } from '@/discord';
 
 export const postFile = express.Router();
 
