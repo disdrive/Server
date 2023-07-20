@@ -16,10 +16,6 @@ const getCurrentDateTime = (): string => {
   return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
 }
 
-const removeSpaces = (str: string): string => {
-  return str.replace(/\s/g, '');
-}
-
 export class Logger {
   private static instance: Logger;
   private constructor() { }
@@ -31,7 +27,7 @@ export class Logger {
   }
 
   public log = (status: number, req: Request): void => {
-    const text = `${req.ip} ${getCurrentDateTime()} ${status.toString()} ${req.method} ${req.originalUrl} ${removeSpaces(JSON.stringify(req.body))}`;
+    const text = `${req.ip} ${getCurrentDateTime()} ${status.toString()} ${req.method} ${req.originalUrl}`;
     console.log(text);
     const logDir = path.join('logs');
     const logFile = path.join(logDir, 'log.txt');
