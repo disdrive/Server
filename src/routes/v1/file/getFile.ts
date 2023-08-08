@@ -15,7 +15,7 @@ getFile.get('/', async (req: Request, res: Response) => {
     return;
   }
 
-  const dirPath = ".cache/downloads";
+  const dirPath = path.join(".cache", "downloads");
   const filePath = path.join(dirPath, fileData.accountId + "_" + fileData.key + "_" + fileData.name);
 
   const discordRes = await axios({
