@@ -1,10 +1,10 @@
-import express, { Request, Response } from 'express';
-import { uploadFile } from '@/discord';
-import { Logger } from '@/utils';
+import express, { Request, Response } from "express";
+import { uploadFile } from "@/discord";
+import { Logger } from "@/utils";
 
 export const postFile = express.Router();
 
-postFile.post('/', async (req: Request, res: Response) => {
+postFile.post("/", async (req: Request, res: Response) => {
   try {
     uploadFile(req.user?.discordChannelId || "", req.file?.path || "");
     Logger.getInstance().log(201, req);

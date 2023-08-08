@@ -1,17 +1,17 @@
-import express, { Request, Response } from 'express';
-import axios from 'axios';
-import fs from 'fs';
-import path from 'path';
-import { getFileData } from '@/db';
-import { Logger } from '@/utils';
+import express, { Request, Response } from "express";
+import axios from "axios";
+import fs from "fs";
+import path from "path";
+import { getFileData } from "@/db";
+import { Logger } from "@/utils";
 
 export const getFile = express.Router();
 
-getFile.get('/', async (req: Request, res: Response) => {
+getFile.get("/", async (req: Request, res: Response) => {
   const fileData = await getFileData(req.query.accountId as string, req.query.key as string);
   if (fileData === undefined || fileData === null) {
     Logger.getInstance().log(404, req);
-    res.status(404).send('Not found');
+    res.status(404).send("Not found");
     return;
   }
 
@@ -20,19 +20,19 @@ getFile.get('/', async (req: Request, res: Response) => {
 
   const discordRes = await axios({
     url: fileData.discordUrl,
-    method: 'GET',
-    responseType: 'stream',
+    method: "GET",
+    responseType: "stream"
   });
   const writer = fs.createWriteStream(filePath);
   discordRes.data.pipe(writer);
 
-  writer.on('finish', () => {
+  writer.on("finish", () => {
     // ファイルのダウンロードが完了したら、それをクライアントに送信する
     res.download(filePath, (err) => {
       if (err) {
         console.error(err);
         Logger.getInstance().log(500, req);
-        res.status(500).send('An error occurred.');
+        res.status(500).send("An error occurred.");
       }
       // ダウンロードが完了したら一時的なファイルを削除する
       fs.unlink(filePath, (err) => {
@@ -41,9 +41,9 @@ getFile.get('/', async (req: Request, res: Response) => {
     });
   });
 
-  writer.on('error', (err) => {
+  writer.on("error", (err) => {
     console.error(err);
     Logger.getInstance().log(500, req);
-    res.status(500).send('An error occurred.');
+    res.status(500).send("An error occurred.");
   });
 });

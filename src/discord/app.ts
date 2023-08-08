@@ -1,6 +1,6 @@
-import { Client, GatewayIntentBits, Events, Interaction, ChatInputCommandInteraction } from 'discord.js';
-import dotenv from 'dotenv';
-import { commands } from './commands'
+import { Client, GatewayIntentBits, Events, Interaction, ChatInputCommandInteraction } from "discord.js";
+import dotenv from "dotenv";
+import { commands } from "./commands";
 
 dotenv.config();
 
@@ -9,8 +9,8 @@ export const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMembers,
-  ],
+    GatewayIntentBits.GuildMembers
+  ]
 });
 
 client.once(Events.ClientReady, (c: Client) => {
@@ -19,7 +19,7 @@ client.once(Events.ClientReady, (c: Client) => {
     .set(commands.map((command) => command.data))
     //.set(Array.from(commands.map((command) => command.data)))
     .then(() => {
-      console.log('Commands set.');
+      console.log("Commands set.");
     });
 });
 
@@ -30,7 +30,7 @@ client.addListener(Events.InteractionCreate, async (interaction: Interaction) =>
   const commandName = interaction.commandName;
   const command = commands.find((command) => command.data.name === commandName);
   if (!command) {
-    console.log('commands not found');
+    console.log("commands not found");
     return;
   }
   try {
@@ -39,8 +39,8 @@ client.addListener(Events.InteractionCreate, async (interaction: Interaction) =>
   } catch (error) {
     console.error(error);
     await interaction.reply({
-      content: 'There was an error while executing this command!',
-      ephemeral: true,
+      content: "There was an error while executing this command!",
+      ephemeral: true
     });
   }
 });

@@ -1,9 +1,9 @@
-import { Request } from 'express';
-import fs from 'fs';
-import path from 'path';
+import { Request } from "express";
+import fs from "fs";
+import path from "path";
 
 const getCurrentDateTime = (): string => {
-  const pad = (n: number): string => n < 10 ? `0${n}` : n.toString();
+  const pad = (n: number): string => (n < 10 ? `0${n}` : n.toString());
 
   const now = new Date();
   const year = now.getFullYear();
@@ -14,11 +14,11 @@ const getCurrentDateTime = (): string => {
   const seconds = pad(now.getSeconds());
 
   return `${year}-${month}-${date} ${hours}:${minutes}:${seconds}`;
-}
+};
 
 export class Logger {
   private static instance: Logger;
-  private constructor() { }
+  private constructor() {}
   public static getInstance(): Logger {
     if (!Logger.instance) {
       Logger.instance = new Logger();
@@ -29,8 +29,8 @@ export class Logger {
   public log = (status: number, req: Request): void => {
     const text = `${req.ip} ${getCurrentDateTime()} ${status.toString()} ${req.method} ${req.originalUrl}`;
     console.log(text);
-    const logDir = path.join('logs');
-    const logFile = path.join(logDir, 'log.txt');
-    fs.appendFileSync(logFile, text + '\n');
-  }
+    const logDir = path.join("logs");
+    const logFile = path.join(logDir, "log.txt");
+    fs.appendFileSync(logFile, text + "\n");
+  };
 }

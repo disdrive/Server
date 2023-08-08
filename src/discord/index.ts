@@ -1,2 +1,2 @@
-export { client } from './app';
-export { uploadFile } from './uploadFile';
+export { client } from "./app";
+export { uploadFile } from "./uploadFile";
