@@ -4,7 +4,7 @@ import { getUserInfo } from "@/db";
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Take the second part of the string after 'Bearer'
+  const token = authHeader;
 
   if (!token) {
     return res.sendStatus(401); // Unauthorized
