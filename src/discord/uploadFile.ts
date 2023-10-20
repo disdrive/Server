@@ -6,5 +6,7 @@ export const uploadFile = async (channelId: string, filePath: string) => {
   const channel = client.channels.cache.get(channelId);
   if (channel === undefined) throw new Error("Channel not found");
   if (!channel.isTextBased()) throw new Error("Channel is not text based");
-  await channel.send({ files: [attachment] });
+  const message = await channel.send({ files: [attachment] });
+
+  return message.attachments.first()?.url || "";
 };
