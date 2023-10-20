@@ -8,7 +8,14 @@ import { Logger } from "@/utils";
 export const getFile = express.Router();
 
 getFile.get("/", async (req: Request, res: Response) => {
-  const fileData = await getFileData(req.query.accountId as string, req.query.key as string);
+  const accountId = req.query.accountId as string;
+  if (accountId === req.user?.userId) {
+    Logger.getInstance().log(403, req);
+    res.status(403).send("Forbidden");
+    return;
+  }
+
+  const fileData = await getFileData(accountId, req.query.key as string);
   if (fileData === undefined || fileData === null) {
     Logger.getInstance().log(404, req);
     res.status(404).send("Not found");
