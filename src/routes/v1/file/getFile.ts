@@ -35,14 +35,13 @@ getFile.get("/", async (req: Request, res: Response) => {
     discordRes.data.pipe(writer);
 
     writer.on("finish", () => {
-      // ファイルのダウンロードが完了したら、それをクライアントに送信する
+      res.header("Content-Disposition", "attachment; filename=" + fileData.name);
       res.download(filePath, (err) => {
         if (err) {
           console.error(err);
           Logger.getInstance().log(500, req);
           res.status(500).send("An error occurred.");
         }
-        // ダウンロードが完了したら一時的なファイルを削除する
         fs.unlink(filePath, (err) => {
           if (err) console.error(err);
         });
