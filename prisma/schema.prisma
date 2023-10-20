@@ -20,13 +20,13 @@ model Account {
 
 model FileData {
   id         Int      @id @default(autoincrement())
-  accountId  String
+  userId     String
   name       String
   key        String
   discordUrl String   @db.Text
   publicUrl  String?  @db.Text
   date       DateTime
-  Account    Account  @relation(fields: [accountId], references: [userId])
+  Account    Account  @relation(fields: [userId], references: [userId])
 
-  @@unique([accountId, key])
+  @@unique([userId, key])
 }
