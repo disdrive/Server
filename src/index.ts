@@ -5,7 +5,7 @@ import path from "path";
 import { client } from "@/discord";
 import { authRoutes } from "@/routes/v1/auth/index";
 import { fileRoutes } from "@/routes/v1/file/index";
-import { testRoutes } from "@/routes/v1/test";
+import { testRoutes } from "@/routes/v1/hello";
 dotenv.config();
 
 const app = express();
