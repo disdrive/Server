@@ -5,3 +5,4 @@ dist/
 prisma/migrations
 .cache/
 logs/
+.dependency-cruiser.js
