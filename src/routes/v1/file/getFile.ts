@@ -10,7 +10,7 @@ export const getFile = express.Router();
 getFile.get("/", async (req: Request, res: Response) => {
   try {
     const userId = req.query.userid as string;
-    if (userId === req.user?.userId) {
+    if (userId !== req.user?.userId) {
       Logger.getInstance().log(403, req);
       res.status(403).send("Forbidden");
       return;
