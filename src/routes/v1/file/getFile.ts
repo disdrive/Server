@@ -35,8 +35,7 @@ getFile.get("/", async (req: Request, res: Response) => {
     discordRes.data.pipe(writer);
 
     writer.on("finish", () => {
-      res.header("Content-Disposition", "attachment; filename=" + fileData.name);
-      res.download(filePath, (err) => {
+      res.download(filePath, fileData.name, (err) => {
         if (err) {
           console.error(err);
           Logger.getInstance().log(500, req);
@@ -46,6 +45,7 @@ getFile.get("/", async (req: Request, res: Response) => {
           if (err) console.error(err);
         });
       });
+      Logger.getInstance().log(200, req);
     });
 
     writer.on("error", (err) => {
