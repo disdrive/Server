@@ -9,14 +9,14 @@ export const getFile = express.Router();
 
 getFile.get("/", async (req: Request, res: Response) => {
   try {
-    const userId = req.query.userid as string;
-    if (userId !== req.user?.userId) {
+    const accountId = req.query.userId as string;
+    if (accountId !== req.user?.userId) {
       Logger.getInstance().log(403, req);
       res.status(403).send("Forbidden");
       return;
     }
 
-    const fileData = await getFileData(userId, req.query.key as string);
+    const fileData = await getFileData(accountId, req.query.key as string);
     if (fileData === undefined || fileData === null) {
       Logger.getInstance().log(404, req);
       res.status(404).send("Not found");
