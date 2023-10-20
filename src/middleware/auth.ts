@@ -3,14 +3,14 @@ import jwt from "jsonwebtoken";
 import { getUserInfo } from "@/db";
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader;
-
-  if (!token) {
-    return res.sendStatus(401); // Unauthorized
-  }
-
   try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader;
+
+    if (!token) {
+      return res.sendStatus(401);
+    }
+
     const decoded = jwt.verify(token, process.env.JWT_SECRET || "") as { id: string; userId: string };
 
     const userInfo = await getUserInfo(decoded.userId);
