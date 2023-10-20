@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { uploadFile } from "@/discord";
-import { Logger } from "@/utils";
+import { Logger, removeQueryAndFragment } from "@/utils";
 import * as fs from "fs";
 import { postFileData } from "@/db";
 
@@ -11,7 +11,7 @@ postFile.post("/", async (req: Request, res: Response) => {
     const url = await uploadFile(req.user?.discordChannelId || "", req.file?.path || "");
     const key = req.file?.filename || "";
     fs.unlinkSync(req.file?.path || "");
-    postFileData(req.user?.userId || "", req.file?.originalname || "", key, url || "");
+    postFileData(req.user?.userId || "", req.file?.originalname || "", key, removeQueryAndFragment(url) || "");
     Logger.getInstance().log(201, req);
     res.header("Content-Type", "application/json");
     res.status(201);

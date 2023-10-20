@@ -23,7 +23,7 @@ model FileData {
   accountId  String
   name       String
   key        String
-  discordUrl String
+  discordUrl String?  @db.Text
   publicUrl  String?
   date       DateTime
   Account    Account  @relation(fields: [accountId], references: [userId])
