@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    image: docker.io/runfunrun/disdrive:pre
+    container_name: disdrive-server
+    env_file: ./.env
+    ports:
+      - '3010:3010'
+    command: npm start
+    depends_on:
+      db:
+        condition: service_healthy
+    # restart: always
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: prisma
+      MYSQL_DATABASE: prisma
+      MYSQL_USER: prisma
+      MYSQL_PASSWORD: prisma
+    volumes:
+      - mysql:/var/lib/mysql
+    # restart: always
+
+volumes:
+  mysql:
