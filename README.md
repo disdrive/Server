@@ -11,4 +11,4 @@
 
 ## Source code dependent relationship visualization
 
-![dependency-graph](https://raw.githubusercontent.com/disdrive/Server/main/dependency-graph.svg?token=GHSAT0AAAAAACJCCKJ7PHI3NL772JAAYV72ZJSQAMA)
+![dependency-graph](./dependency-graph.svg)
