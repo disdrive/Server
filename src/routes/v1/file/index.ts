@@ -9,4 +9,4 @@ export const fileRoutes = express.Router();
 fileRoutes.use(auth); // Apply the auth middleware to all routes
 
 fileRoutes.use("/", getFile);
-fileRoutes.post("/", upload, postFile);
+fileRoutes.post("/", upload.single("file"), postFile);
